@@ -1,6 +1,6 @@
 package raj.animesh.journalapp;
 
-import android.content.Intent;
+import  android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -121,7 +121,6 @@ public class AddJournalActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     private void SaveJournal() {
@@ -197,5 +196,11 @@ public class AddJournalActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         currentUser = firebaseAuth.getCurrentUser();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(this,JournalActivity.class));
     }
 }

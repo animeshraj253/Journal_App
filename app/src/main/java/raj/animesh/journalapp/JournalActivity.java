@@ -55,7 +55,6 @@ public class JournalActivity extends AppCompatActivity {
     private  MyAdapter myAdapter;
 
     private FloatingActionButton fab;
-    private TextView logOutBtn;
 
 
 
@@ -71,19 +70,10 @@ public class JournalActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(JournalActivity.this, AddJournalActivity.class);
                 startActivity(i);
+                finish();
             }
         });
 
-        logOutBtn = findViewById(R.id.logOutBtn);
-
-        logOutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                firebaseAuth.signOut();
-                Intent i = new Intent(JournalActivity.this, MainActivity.class);
-                startActivity(i);
-            }
-        });
 
         // firebase auth
         firebaseAuth = FirebaseAuth.getInstance();
@@ -114,8 +104,6 @@ public class JournalActivity extends AppCompatActivity {
 
         // post array list
         journalList = new ArrayList<>();
-
-
     }
 
     // adding menu
@@ -132,6 +120,7 @@ public class JournalActivity extends AppCompatActivity {
             if ( firebaseUserJournal != null && firebaseAuth != null){
                 Intent i = new Intent(JournalActivity.this, AddJournalActivity.class);
                 startActivity(i);
+                finish();
             }
         }
         else if (itemID == R.id.action_signout){
@@ -139,6 +128,7 @@ public class JournalActivity extends AppCompatActivity {
                 firebaseAuth.signOut();
                 Intent i = new Intent(JournalActivity.this, MainActivity.class);
                 startActivity(i);
+                finish();
             }
         }
         return super.onOptionsItemSelected(item);
@@ -164,9 +154,9 @@ public class JournalActivity extends AppCompatActivity {
                 //recycler view
                 myAdapter = new MyAdapter(JournalActivity.this,journalList);
 
-                recyclerView.setAdapter(myAdapter);
-
                 myAdapter.notifyDataSetChanged();
+
+                recyclerView.setAdapter(myAdapter);
 
             }
         }).addOnFailureListener(new OnFailureListener() {
